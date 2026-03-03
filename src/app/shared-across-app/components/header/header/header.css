@@ -1,0 +1,18 @@
+.app-header {
+  background: var(--fundo-cartoes);
+  height: 60px;
+  box-shadow: 0 2px 10px var(--destaques-fortes);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between; 
+  gap: 10%;
+}
+

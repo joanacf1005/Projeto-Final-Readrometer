@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --fundo-pagina: #f5f5f7ff;
+  --fundo-cartoes: #ececf4ff;
+  --hover-cartoes: #dddcf1ff;
+  --botoes-secundarios: #cecceeff;
+  --botao-primario: #b1ade8ff;
+  --botao-hover: #938de2ff;
+  --titulos: #716cb4ff;
+  --destaques-fortes: #4f4a85ff;
+  --texto-principal: #2a2730ff;
+  --texto-secundario: #6b6a75ff;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo-pagina);
+}
