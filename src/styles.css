@@ -9,6 +9,11 @@
   --destaques-fortes: #4f4a85ff;
   --texto-principal: #2a2730ff;
   --texto-secundario: #6b6a75ff;
+
+}
+
+* {
+  font-family: 'Rounded Mplus 1c', 'Quicksand', 'Comfortaa', -apple-system, sans-serif; 
 }
 
 body {

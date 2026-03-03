@@ -1,0 +1,29 @@
+<section class="book-gallery" aria-label="Library">
+  
+  <div class="gallery-header">
+    
+    <div class="filter-buttons">
+      <button class="filter-btn">All Books</button>
+      <button class="filter-btn">Finished</button>
+      <button class="filter-btn">Want To Read</button>
+      <button class="filter-btn">In Progress</button>
+    </div>
+    
+    <button class="btn-add" aria-label="Add New Book">Add New Book</button>
+  </div>
+
+  <div class="books-grid" id="books-grid" role="tabpanel">
+    <div class="book-card" *ngFor="let book of filteredBooks" [attr.data-status]="book.status">
+      <div class="book-cover">
+        <img [src]="book.cover || 'https://via.placeholder.com/140x200/cecceeff/716cb4?text=Livro'" 
+             [alt]="'Capa de ' + book.title" loading="lazy">
+      </div>
+      <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p class="author">{{ book.author }}</p>
+        <span class="status" [ngClass]="book.status">{{ book.status | titlecase }}</span>
+      </div>
+    </div>
+  </div>
+
+</section>
