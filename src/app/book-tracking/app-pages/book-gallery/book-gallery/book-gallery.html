@@ -9,21 +9,20 @@
       <button class="filter-btn">In Progress</button>
     </div>
     
-    <button class="btn-add" aria-label="Add New Book">Add New Book</button>
+    <button class="btn-add" routerLink="/new-book"> Add New Book</button>
+ 
   </div>
 
-  <div class="books-grid" id="books-grid" role="tabpanel">
-    <div class="book-card" *ngFor="let book of filteredBooks" [attr.data-status]="book.status">
-      <div class="book-cover">
-        <img [src]="book.cover || 'https://via.placeholder.com/140x200/cecceeff/716cb4?text=Livro'" 
-             [alt]="'Capa de ' + book.title" loading="lazy">
-      </div>
-      <div class="book-info">
+  <div class="books-grid">
+    @for (book of filteredBooks; track book.title) {
+      <div class="book-card" [attr.data-status]="book.status">
         <h3>{{ book.title }}</h3>
-        <p class="author">{{ book.author }}</p>
-        <span class="status" [ngClass]="book.status">{{ book.status | titlecase }}</span>
+        <p>{{ book.author }}</p>
+        <span class="status">{{ book.status }}</span>
       </div>
-    </div>
+    } @empty {
+      <p>Nenhum livro ainda...</p>
+    }
   </div>
-
+  
 </section>

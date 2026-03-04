@@ -1,0 +1,103 @@
+<div class="add-book-page">
+
+  <a routerLink="/books" class="back-link">← Back to Gallery</a>
+
+  <h1>Add New Book</h1>
+
+  <form [formGroup]="form" (ngSubmit)="saveBook()">
+    <div>
+      <div class="form-group">
+        <label>Title:</label>
+        <input formControlName="title" placeholder="Book Title">
+        @if (form.get('title')?.invalid && form.get('title')?.touched) {
+          <p class="error">Title required and must have at least 3 chars.</p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Author:</label>
+        <input formControlName="author" placeholder="Book Author">
+        @if (form.get('author')?.invalid && form.get('author')?.touched) {
+          <p class="error">Author required and must have at least 3 chars.</p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Edition:</label>
+        <input formControlName="edition" placeholder="Edition">
+        @if (form.get('edition')?.invalid && form.get('edition')?.touched) {
+          <p class="error">Edition required.</p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>BookCase Url:</label>
+        <input formControlName="photo" placeholder="ImageUrl.jpeg">
+        @if (form.get('photo')?.invalid && form.get('photo')?.touched) {
+          <p class="error">BookCase required.</p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Description:</label>
+        <textarea formControlName="description" placeholder="Summary of the book (max 500 chars)" rows="4"maxlength="500"></textarea>
+        <div class="description-info">
+          <span>{{ form.get('description')?.value?.length || 0 }}/500</span>
+          @if (form.get('description')?.invalid && form.get('description')?.touched) {
+            <p class="error">Description required and must not exceed 500 chars.</p>
+          }
+        </div>
+      </div>
+    </div>
+      
+
+    <div class="form-right">
+      <div class="form-group">
+        <label>Status:</label>
+        <select formControlName="status">
+          <option value="">Select Status</option>
+          <option value="To Read">To Read</option>
+          <option value="Reading">Reading</option>
+          <option value="Finished">Finished</option>
+        </select>
+        @if (form.get('status')?.invalid && form.get('status')?.touched) {
+          <p class="error">Status is required.</p>
+        }
+      </div>
+    
+      @if (showRatingAndDate) {
+        <div class="form-group">
+          <label>Rating:</label>
+          <select formControlName="rating">
+            <option value="">Select rating</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+          </select>
+          @if (form.get('rating')?.invalid && form.get('rating')?.touched) {
+            <p class="error">Rating required.</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="completionDate">Completion Date</label>
+          <div class="date-input-wrapper">
+            <input id="completionDate" type="date" formControlName="completionDate" class="date-input">
+            <svg class="calendar-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M19 4h-3.5V2h-1v2h-7V2h-1v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 10v4m0 4h.01" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+      }
+
+      <div class="form-actions">
+        <button type="submit">Save Book</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+

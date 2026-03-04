@@ -1,12 +1,16 @@
 .gallery-header{
-    display: flex;
-    justify-content: space-around;
-    padding-left: 5%;
-    padding-right: 5%;
+    display: grid; 
+    grid-template-columns: 70% 30%;
     padding: 5%;
-    
 }
 
+.book-gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  background: var(--fundo-pagina);  
+}
 
 .filter-btn{
     all: unset;
@@ -22,4 +26,100 @@
     border: 2px solid transparent;
     font-size: 0.95rem;
     gap: 0.5rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--botao-primario);     
+  color: white;
+  border-color: var(--botao-hover);      
+  transform: translateY(-2px);
+}
+
+.btn-add {
+  background: var(--botao-primario);    
+  color: white;
+  border: 2px solid var(--botao-primario);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-add:hover {
+  background: var(--botao-hover);       
+  border-color: var(--botao-hover);
+  transform: translateY(-2px);
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.book-card {
+  background: var(--fundo-cartoes);     
+  border-radius: 16px;
+  padding: 5%;
+  box-shadow: 0 8px 32px rgba(113, 108, 180, 0.15); 
+  transition: all 0.3s ease;
+  border: 1px solid var(--hover-cartoes);
+}
+
+.book-card:hover {
+  background: var(--hover-cartoes);      
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(79, 74, 133, 0.25);  
+}
+
+.book-cover {
+  width: 100%;
+  height: 200px;
+  background: var(--fundo-cartoes);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-info {
+  padding: 1.5rem;
+}
+
+.book-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: var(--titulos);                 
+}
+
+.author {
+  color: var(--texto-secundario);        
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.status {
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status.To\ Read {
+  background: var(--botoes-secundarios);
+  color: var(--titulos);
+}
+
+.status.Reading {
+  background: color-mix(in srgb, var(--botao-primario) 80%, white);
+  color: var(--destaques-fortes);
+}
+
+.status.Finished {
+  background: color-mix(in srgb, var(--titulos) 70%, white);
+  color: var(--titulos);
 }
