@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DashboardStats } from '../dashboard-stats/dashboard-stats/dashboard-stats';
+import { Book } from '../new-book/new-book';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,4 +8,16 @@ import { DashboardStats } from '../dashboard-stats/dashboard-stats/dashboard-sta
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {}
+
+export class Dashboard implements OnInit {
+  lastBook: Book | null = null;
+
+  ngOnInit(): void {
+    const books: Book[] = JSON.parse(localStorage.getItem('books') || '[]');
+    this.lastBook = books[books.length - 1] || null;
+  }
+
+   getRating(rating: number): string {
+    return 'You rated this book: ' + rating + '/5 💜';
+  }
+}

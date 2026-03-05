@@ -3,11 +3,11 @@
   <div class="stats-grid">
     
    
-    <section class="stat-card" role="group" aria-label="Total of Books">
+    <section class="stat-card total" routerLink="/books" role="group" aria-label="Total of Books">
       <div class="stat-icon icon-total">🌌</div>
       <div class="stat-info">
         <h3>{{ stats.total }}</h3>                    
-        <p>Total Books In Your Collection</p>
+        <p>Books In Collection</p>
       </div>
     </section>
     
@@ -43,7 +43,7 @@
       <section class="stat-card" role="group" aria-label="Rating Average">
         <div class="stat-icon icon-rating-average">💜</div>
         <div class="stat-info">
-          <h3>{{ stats.averageRating }}</h3>            
+          <h3>{{ stats.averageRating | number: '1.0-1'}}</h3>        
           <p>Rating Average</p>
         </div>
       </section>

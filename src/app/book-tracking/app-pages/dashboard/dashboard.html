@@ -1,17 +1,26 @@
-<main class="dashboard" role="main" aria-label="Dashboard principal"> 
-  
-  <section class="section last-book" aria-labelledby="ultimo-livro-title">
-    <h2 id="ultimo-livro-title">Most Recent Tale</h2>
-    <section class="featured-book">
-      <div class="book-cover">
-        <img src="/61439040.jpg" alt="1984 by George Orwell, bookcase">
+<main class="dashboard" role="main" aria-label="Dashboard"> 
+  <section class="section last-book" aria-labelledby="last-book">
+    <h2>Most Recent Tale</h2>
+    
+    @if (lastBook) {
+      <section class="featured-book">
+        <div class="book-cover">
+          <img [src]="lastBook.photo" [alt]="'Book Cover of ' + lastBook.title">
+        </div>
+        <div class="featured-book-info">
+          <h3>{{ lastBook.title }}</h3>
+          <p class="author">{{ lastBook.author }}</p>
+          <P class="status">{{ lastBook.status }}</P>
+            @if (lastBook.rating && lastBook.rating > 0) {
+              <p class="status-text">You rated this book: {{ lastBook.rating }}/5 💜</p>
+            } 
+        </div>
+      </section>
+    } @else {
+      <div class="no-book-yet">
+        <p>No adventures yet</p>
       </div>
-      <div class="featured-book-info">
-        <h3>1984</h3>
-        <p class="autor">George Orwell</p>
-        <p>💜💜💜💜💜</p>
-      </div>
-    </section>
+    }
   </section>
   <app-dashboard-stats></app-dashboard-stats> 
 </main>

@@ -1,12 +1,15 @@
 <header class="app-header">
-  <button class="logo-btn" (click)="goDashboard()" aria-label="Página inicial">
-    <img src="/Readrometer-Logo.png" alt="Readrometer Logo" class="logo-image">
-  </button>
 
-  <nav class="nav-header" aria-label="Navegação principal">
-    <button class="nav-link" (click)="goDashboard()" type="button" aria-current="page">Dashboard</button>
+  <div class="header-subtitle">
+    <p>The best way to track your book adventures</p>
+  </div>
+  
+  <div class="app-name-div">
+    <button class="app-name" (click)="goDashboard()" type="button">Readrometer</button>
+  </div>
+  
+  <nav class="nav-header">
+    <button class="nav-link" (click)="goDashboard()" type="button">Dashboard</button>
     <button class="nav-link" (click)="goLibrary()" type="button">Library</button>
   </nav>
-
 </header>
-

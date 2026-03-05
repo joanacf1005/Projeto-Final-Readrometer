@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Book } from '../../new-book/new-book';  
+import { Book } from '../../new-book/new-book'; 
+import { Router, RouterLink } from '@angular/router';
 
 export interface DashboardData {
   total: number;
@@ -12,8 +13,8 @@ export interface DashboardData {
 
 @Component({
   selector: 'app-dashboard-stats',
-  standalone: true,  // ← ADICIONADO!
-  imports: [CommonModule],
+  standalone: true,  
+  imports: [CommonModule, RouterLink],
   templateUrl: './dashboard-stats.html',
   styleUrl: './dashboard-stats.css'
 })
@@ -63,7 +64,9 @@ export class DashboardStats implements OnInit {
   calcAverageRating(): number | null {
     const finishedBooks = this.getFinishedBooks();
     
-    if (finishedBooks.length === 0) return null;
+    if (finishedBooks.length === 0) {
+      return null;
+    }
     
     const soma = finishedBooks.reduce((total, book) => {
       const ratingNumber = Number(book.rating) || 0;  

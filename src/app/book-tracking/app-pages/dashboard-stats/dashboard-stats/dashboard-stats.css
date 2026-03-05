@@ -9,7 +9,11 @@
   gap: 1.5rem;
 }
 
-.stat-card {
+.stat-card.total{
+    cursor: pointer;
+}
+
+.stat-card { 
   background: var(--fundo-cartoes);
   padding: 1.5rem;
   border-radius: 16px;
@@ -17,6 +21,10 @@
   gap: 1rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   transition: transform 0.2s;
+}
+
+.stat-card.total:hover{
+    background-color: var(--botoes-secundarios);
 }
 
 .stat-card:hover {

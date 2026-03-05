@@ -40,11 +40,11 @@
 
       <div class="form-group">
         <label>Description:</label>
-        <textarea formControlName="description" placeholder="Summary of the book (max 500 chars)" rows="4"maxlength="500"></textarea>
+        <textarea formControlName="description" placeholder="Summary of the book (max 1000 chars)" rows="5"maxlength="1000"></textarea>
         <div class="description-info">
-          <span>{{ form.get('description')?.value?.length || 0 }}/500</span>
+          <span>{{ form.get('description')?.value?.length || 0 }}/1000</span>
           @if (form.get('description')?.invalid && form.get('description')?.touched) {
-            <p class="error">Description required and must not exceed 500 chars.</p>
+            <p class="error">Description required and must not exceed 1000 chars.</p>
           }
         </div>
       </div>
