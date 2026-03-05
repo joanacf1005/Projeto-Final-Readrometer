@@ -10,7 +10,7 @@ export interface Book {
   description: string;
   photo: string;
   status: 'To Read' | 'Reading' | 'Finished';
-  rating?: number;
+  rating: number;
   completionDate?: string;
 }
 

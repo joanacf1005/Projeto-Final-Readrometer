@@ -1,1 +1,53 @@
-<p>dashboard-stats works!</p>
+<section class="section statistics" aria-labelledby="stats-title">
+  <h2 id="stats-title">Reading Insights</h2>
+  <div class="stats-grid">
+    
+   
+    <section class="stat-card" role="group" aria-label="Total of Books">
+      <div class="stat-icon icon-total">🌌</div>
+      <div class="stat-info">
+        <h3>{{ stats.total }}</h3>                    
+        <p>Total Books In Your Collection</p>
+      </div>
+    </section>
+    
+    
+    <section class="stat-card" role="group" aria-label="Completed">
+      <div class="stat-icon icon-completed">☄️</div>
+      <div class="stat-info">
+        <h3>{{ stats.finished }}</h3>                 
+        <p>Stories Conquered</p>
+      </div>
+    </section>
+    
+    
+    <section class="stat-card" role="group" aria-label="Reading">
+      <div class="stat-icon icon-reading">📖</div>
+      <div class="stat-info">
+        <h3>{{ stats.reading }}</h3>                   
+        <p>Open Chapters</p>
+      </div>
+    </section>
+    
+    
+    <section class="stat-card" role="group" aria-label="Want to Read">
+      <div class="stat-icon icon-want-to-read">🔮</div>
+      <div class="stat-info">
+        <h3>{{ stats.toRead }}</h3>                     
+        <p>Future Adventures</p>
+      </div>
+    </section>
+
+   
+    @if (stats.averageRating !== null) {
+      <section class="stat-card" role="group" aria-label="Rating Average">
+        <div class="stat-icon icon-rating-average">💜</div>
+        <div class="stat-info">
+          <h3>{{ stats.averageRating }}</h3>            
+          <p>Rating Average</p>
+        </div>
+      </section>
+    }
+  </div>
+</section>
+

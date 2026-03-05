@@ -3,7 +3,7 @@ import { DashboardStats } from '../dashboard-stats/dashboard-stats/dashboard-sta
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [ DashboardStats ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

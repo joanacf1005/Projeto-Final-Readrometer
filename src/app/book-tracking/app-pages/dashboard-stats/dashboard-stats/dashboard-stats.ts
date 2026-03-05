@@ -62,9 +62,14 @@ export class DashboardStats implements OnInit {
 
   calcAverageRating(): number | null {
     const finishedBooks = this.getFinishedBooks();
+    
     if (finishedBooks.length === 0) return null;
     
-    const soma = finishedBooks.reduce((total, book) => total + (book.rating || 0), 0);
+    const soma = finishedBooks.reduce((total, book) => {
+      const ratingNumber = Number(book.rating) || 0;  
+      return total + ratingNumber;
+    }, 0);
+    
     const media = soma / finishedBooks.length;
     return parseFloat(media.toFixed(1));
   }
