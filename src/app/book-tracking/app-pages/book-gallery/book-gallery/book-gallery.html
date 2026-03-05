@@ -2,23 +2,32 @@
   
   <div class="gallery-header">
     
-    <div class="filter-buttons">
-      <button class="filter-btn">All Books</button>
-      <button class="filter-btn">Finished</button>
-      <button class="filter-btn">Want To Read</button>
-      <button class="filter-btn">In Progress</button>
+    <div class="header-buttons">
+      <button class="filter-btn" [class.active]="currentFilter === 'all'"(click)="filterBooks('all')">All Books</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'finished'"(click)="filterBooks('finished')">Finished</button>    
+      <button class="filter-btn" [class.active]="currentFilter === 'toRead'"(click)="filterBooks('toRead')">To Read</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'reading'"(click)="filterBooks('reading')">In Progress</button>
+      
+      <button class="btn-add" routerLink="/new-book"> Add New Book</button>
     </div>
     
-    <button class="btn-add" routerLink="/new-book"> Add New Book</button>
  
   </div>
 
   <div class="books-grid">
     @for (book of filteredBooks; track book.title) {
       <div class="book-card" [attr.data-status]="book.status">
-        <h3>{{ book.title }}</h3>
-        <p>{{ book.author }}</p>
-        <span class="status">{{ book.status }}</span>
+      
+        <div class="book-image">
+          <img [src]="book.photo || 'assets/images/default-book.png'" [alt]="book.title" loading="lazy">
+        </div>
+        
+        <div class="book-info">
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+          <span class="status">{{ book.status }}</span>
+        </div>
+      
       </div>
     } @empty {
       <p>Nenhum livro ainda...</p>
