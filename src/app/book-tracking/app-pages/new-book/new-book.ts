@@ -28,7 +28,7 @@ export class NewBook {
     edition: new FormControl('', [Validators.required]),
     photo: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
-    status: new FormControl('To Read', [Validators.required]),
+    status: new FormControl('', [Validators.required]),
     rating: new FormControl('', []),
     completionDate: new FormControl('', []),
   });

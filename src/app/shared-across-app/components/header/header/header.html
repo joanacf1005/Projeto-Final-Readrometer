@@ -11,5 +11,11 @@
   <nav class="nav-header">
     <button class="nav-link" (click)="goDashboard()" type="button">Dashboard</button>
     <button class="nav-link" (click)="goLibrary()" type="button">Library</button>
+    <button class="theme-toggle" (click)="toggleTheme()"[attr.aria-label]="isDarkMode ? 'Light mode' : 'Dark mode'">
+       @if (isDarkMode) { ☀️ } @else { 🌕 }
+    </button>
   </nav>
+
+  
+
 </header>

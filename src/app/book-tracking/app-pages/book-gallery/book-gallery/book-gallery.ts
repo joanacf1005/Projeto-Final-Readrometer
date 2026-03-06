@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterLink } from '@angular/router';
+import { Book } from '../../new-book/new-book';
+import { BookDetails } from '../../book-details/book-details/book-details';
 
 enum BookFilter {
   ALL = 'all',
@@ -18,13 +20,26 @@ enum BookFilter {
 })
 
 export class BookGallery implements OnInit {
-  allBooks: any[] = [];
-  filteredBooks: any[] = [];
+  allBooks: Book[] = [];
+  filteredBooks: Book[] = [];
   currentFilter: BookFilter = BookFilter.ALL;  
+
+  currentPage = 1;
+  itemsPerPage = 6;
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredBooks.length / this.itemsPerPage);
+  }
+
+  get currentBooks(): Book[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredBooks.slice(start, end);
+  }
   
   ngOnInit() {  
     const books = JSON.parse(localStorage.getItem('books') || '[]');
-    this.allBooks = books;
+    this.allBooks = books.reverse();
     this.filteredBooks = [...books];
   }
 
@@ -47,4 +62,23 @@ export class BookGallery implements OnInit {
         break;
     }
   }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  getPages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
 }

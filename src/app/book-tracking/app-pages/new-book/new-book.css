@@ -1,77 +1,210 @@
 .add-book-page {
   padding: 2rem;
-  max-width: 500px;
+  max-width: 1100px;
   margin: 0 auto;
+  background: var(--fundo-pagina);
+  min-height: 100vh;
+}
+
+.back-link {
+  color: var(--texto-principal);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--botao-primario);
 }
 
 .add-book-page h1 {
   color: var(--titulos);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.form-global-container {
+  margin-top: 1.5rem;
+  background: var(--fundo-cartoes);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-container {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.form-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: min-content;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+}
+
+.form-left > .form-group,
+.form-right > .form-group {
+  margin-bottom: 2rem;
+}
+
+.form-right .form-group:nth-child(2) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-right .form-group:nth-child(3),
+.form-right .form-group:nth-child(4) {
+  min-height: 105px;
+}
+
+.form-actions {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.form-left > .form-group:last-child,
+.form-right > .form-group:last-child {
+  margin-bottom: 0;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--texto-principal);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.025em;
 }
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
+  height: 53.6px;
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--botoes-secundarios);
-  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--fundo-cartoes);
+  border-radius: 12px;
   font-family: inherit;
   font-size: 1rem;
+  color: var(--texto-secundario);
+  background: var(--fundo-pagina);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
-button[type="submit"] {
-  background: var(--botao-primario);
-  color: white;
-  padding: 0.75rem 2rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%;
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--texto-secundario);
 }
 
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--botao-primario);
+  background: var(--fundo-pagina);
+  box-shadow: 0 0 0 4px rgba(177, 173, 232, 0.15);
+  transform: translateY(-1px);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.description-info {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.description {
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 
 .date-input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
+  min-height: 60px;
+  padding-top: 0.5rem;
 }
 
 .date-input {
   width: 100%;
-  padding: 1rem 1rem 1rem 3rem; /* espaço para o ícone à esquerda */
-  border: 2px solid var(--hover-cartoes);
+  padding: 1.125rem 1.25rem 1.125rem 3.5rem;
+  border: 2px solid var(--botoes-secundarios);
   border-radius: 12px;
-  background-color: var(--fundo-cartoes);
   font-size: 1rem;
   color: var(--texto-principal);
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  appearance: none; /* remove o estilo padrão do input[type=date] */
+  background: var(--fundo-pagina);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .date-input:focus {
   border-color: var(--botao-primario);
-  box-shadow: 0 0 0 3px rgba(177, 173, 232, 0.1);
+  box-shadow: 0 0 0 4px rgba(177, 173, 232, 0.15);
+  background: var(--fundo-pagina);
 }
 
 .calendar-icon {
   position: absolute;
-  left: 1rem;
-  width: 20px;
-  height: 20px;
+  left: 1.25rem;
+  width: 22px;
+  height: 22px;
   color: var(--texto-secundario);
   pointer-events: none;
 }
+
+.error {
+  color: var(--destaques-fortes);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+button[type="submit"] {
+  margin-top: 1%;
+  background: linear-gradient(135deg, var(--botao-primario), var(--botao-hover));
+  color: var(--fundo-pagina);
+  padding: 1.25rem 2.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(177, 173, 232, 0.3);
+  letter-spacing: 0.025em;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(177, 173, 232, 0.4);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
 
