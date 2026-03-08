@@ -16,6 +16,7 @@
 }
 
 .featured-book {
+  cursor: pointer;
   background: var(--fundo-cartoes);
   border-radius: 20px;
   padding: 2rem;

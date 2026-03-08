@@ -14,7 +14,7 @@
   --status-toRead: #b58fa6;      
   --status-reading: #b7b6a4;    
   --status-finished: #70806e; 
-
+  --delete-btn: #965c7f; 
 }
 
 [data-theme="dark"] {
@@ -32,7 +32,9 @@
   --footer-fundo: #716cb466;   
   --status-toRead: #f9bfce;    
   --status-reading: #fcfae3;    
-  --status-finished: #e3f7e1;   
+  --status-finished: #e3f7e1;
+  --delete-btn: #fed9e3;  
+
 }
 
 * {

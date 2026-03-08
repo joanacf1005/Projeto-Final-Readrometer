@@ -69,7 +69,13 @@
   padding: 1rem 0;
 }
 
+.book-card-link {
+  all: unset;           
+  display: block;
+}
+
 .book-card {
+  cursor: pointer;
   background: var(--fundo-cartoes);     
   border-radius: 16px;
   padding: 5%;

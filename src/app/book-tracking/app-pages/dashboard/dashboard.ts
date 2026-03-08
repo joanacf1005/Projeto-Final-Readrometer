@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardStats } from '../dashboard-stats/dashboard-stats/dashboard-stats';
 import { Book } from '../new-book/new-book';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,15 @@ import { Book } from '../new-book/new-book';
 
 export class Dashboard implements OnInit {
   lastBook: Book | null = null;
+
+  constructor(private router: Router) {}
+
+  goToBookDetails(bookId: string | undefined) {
+    if (bookId) {
+      console.log('Indo para:', bookId);
+      this.router.navigate(['/books', bookId]);  // ← /books/[ID]
+    }
+  }
 
   ngOnInit(): void {
     const books: Book[] = JSON.parse(localStorage.getItem('books') || '[]');

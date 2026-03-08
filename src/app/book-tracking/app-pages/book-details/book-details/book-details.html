@@ -1,1 +1,52 @@
-<p>book-details works!</p>
+<div class="book-detail-page">
+  <a routerLink="/books" class="back-link">← Back to Gallery</a>
+  
+  <section class="book-detail-card">
+   
+    <div class="book-cover-section">
+      <img [src]="book.photo" [alt]="book.title" class="book-cover" />
+      <span class="status-badge"[ngClass]="'status-' + (book.status || '').toLowerCase().replace(' ', '-')">
+        {{ book.status }}
+      </span>
+    </div>
+
+   
+    <div class="book-info-section">
+      
+      <div class="book-header">
+        <h1 class="book-title">{{ book.title }}</h1>
+        <p class="book-author">by {{ book.author }}</p>
+        <p class="book-edition">{{ book.edition }} Edition</p>
+      </div>
+
+     
+      <div class="book-details-grid">
+
+        @if (book.rating) {
+        <div class="details-item">
+          <span class="details-label">Rating</span>
+          <span class="rating-hearts">{{ book.rating }}/5💜</span>
+        </div>
+        }
+        
+        @if (book.completionDate) {
+        <div class="details-item">
+          <span class="details-label">Completed on</span>
+          <span>{{ book.completionDate | date:'dd/MM/yyyy' }}</span>
+        </div>
+        }
+      </div>
+
+      <div class="book-description">
+        <h2 class="description-title">Description</h2>
+        <p>{{ book.description }}</p>
+      </div>
+    
+
+      <div class="book-actions">
+        <a [routerLink]="['/new-book', book.id]" class="btn-edit">Edit Book</a>
+        <a class="btn-delete"(click)="deleteBook()">Delete Book</a>
+      </div>
+    </div>
+  </section>
+</div>

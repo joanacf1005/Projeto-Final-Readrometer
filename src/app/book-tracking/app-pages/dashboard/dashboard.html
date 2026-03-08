@@ -1,9 +1,9 @@
 <main class="dashboard" role="main" aria-label="Dashboard"> 
   <section class="section last-book" aria-labelledby="last-book">
-    <h2>Most Recent Tale</h2>
+    <h2>Last Added Tale</h2>
     
     @if (lastBook) {
-      <section class="featured-book">
+      <section class="featured-book" (click)="goToBookDetails(lastBook?.id)">
         <div class="book-cover">
           <img [src]="lastBook.photo" [alt]="'Book Cover of ' + lastBook.title">
         </div>

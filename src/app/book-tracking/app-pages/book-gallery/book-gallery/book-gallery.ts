@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { Book } from '../../new-book/new-book';
-import { BookDetails } from '../../book-details/book-details/book-details';
+
 
 enum BookFilter {
   ALL = 'all',
@@ -22,10 +22,12 @@ enum BookFilter {
 export class BookGallery implements OnInit {
   allBooks: Book[] = [];
   filteredBooks: Book[] = [];
-  currentFilter: BookFilter = BookFilter.ALL;  
+  currentFilter: BookFilter = BookFilter.ALL; 
 
   currentPage = 1;
   itemsPerPage = 6;
+
+  constructor(private router: Router) {}
 
   get totalPages(): number {
     return Math.ceil(this.filteredBooks.length / this.itemsPerPage);
@@ -37,13 +39,22 @@ export class BookGallery implements OnInit {
     return this.filteredBooks.slice(start, end);
   }
   
+  
+  addNewBook() {
+    this.router.navigate(['/new-book']);
+  }
+
+  
   ngOnInit() {  
-    const books = JSON.parse(localStorage.getItem('books') || '[]');
+    let books = JSON.parse(localStorage.getItem('books') || '[]');
+    books = books.filter((book: Book, index: number, self: Book[]) => 
+      index === self.findIndex((b: Book) => b.id === book.id)
+    );
+    
     this.allBooks = books.reverse();
     this.filteredBooks = [...books];
   }
 
-  
   filterBooks(filter: string) { 
     this.currentFilter = filter as BookFilter;  
     
@@ -80,5 +91,8 @@ export class BookGallery implements OnInit {
   getPages(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
-
+  
+  trackByFn(index: number, book: Book): string {
+    return `${book.id}-${index}`;  
+  }
 }

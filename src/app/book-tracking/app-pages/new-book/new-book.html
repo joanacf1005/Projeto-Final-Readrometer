@@ -1,6 +1,7 @@
 <div class="add-book-page">
   <a routerLink="/books" class="back-link">← Back to Gallery</a>
-  <h1>Add New Book</h1>
+  <h1>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h1>
+
   
   <form [formGroup]="form" (ngSubmit)="saveBook()" class="form-global-container">
     <div class="form-container">

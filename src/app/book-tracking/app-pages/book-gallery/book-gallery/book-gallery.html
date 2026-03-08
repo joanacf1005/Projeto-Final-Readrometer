@@ -6,28 +6,31 @@
       <button class="filter-btn" [class.active]="currentFilter === 'finished'"(click)="filterBooks('finished')">Finished</button>    
       <button class="filter-btn" [class.active]="currentFilter === 'toRead'"(click)="filterBooks('toRead')">To Read</button>
       <button class="filter-btn" [class.active]="currentFilter === 'reading'"(click)="filterBooks('reading')">In Progress</button>
-      <button class="btn-add" routerLink="/new-book">Add New Book</button>
+      <button class="btn-add" type="button" (click)="addNewBook()">Add New Book</button>
+
     </div>
   </div>
 
   <div class="books-grid">
-    @for (book of currentBooks; track book.title; let i = $index) {
-      <div class="book-card" [attr.data-status]="book.status">
-        <div class="book-image">
-          <img [src]="book.photo || 'assets/images/default-book.png'" [alt]="book.title">
+     @for (book of currentBooks; track trackByFn($index, book); let i = $index) {
+      <a [routerLink]="['/books', book.id || i]" class="book-card-link">
+        <div class="book-card" [attr.data-status]="book.status">
+          <div class="book-image">
+            <img [src]="book.photo || 'assets/images/default-book.png'" [alt]="book.title">
+          </div>
+          
+          <div class="book-info">
+            <h3>{{ book.title }}</h3>
+            <p class="author">{{ book.author }}</p>
+            <span class="status"
+              [class.status-to-read]="book?.status === 'To Read'"
+              [class.status-reading]="book?.status === 'Reading'"
+              [class.status-finished]="book?.status === 'Finished'">
+                {{ book?.status }}
+            </span>
+          </div>
         </div>
-        
-        <div class="book-info">
-          <h3>{{ book.title }}</h3>
-          <p class="author">{{ book.author }}</p>
-          <span class="status"
-            [class.status-to-read]="book?.status === 'To Read'"
-            [class.status-reading]="book?.status === 'Reading'"
-            [class.status-finished]="book?.status === 'Finished'">
-              {{ book?.status }}
-          </span>
-        </div>
-      </div>
+      </a>
     } 
   </div>
 
