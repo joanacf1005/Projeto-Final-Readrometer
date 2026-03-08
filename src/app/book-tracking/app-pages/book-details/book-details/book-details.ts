@@ -21,20 +21,20 @@ export class BookDetails {
 
     this.bookId = this.route.snapshot.paramMap.get('id') || '';
     
-    const books = JSON.parse(localStorage.getItem('books') || '[]');
+    const books = JSON.parse(localStorage.getItem('books') || '[]'); //carrega todos os livros
     
-    const foundBook = books.find((b: Book) => b.id === this.bookId);
-    this.book = foundBook || {};
+    const foundBook = books.find((b: Book) => b.id === this.bookId); //procura o id que dê match
+    this.book = foundBook || {}; //recebe o livro
     
   }
 
   deleteBook(): void {
     if (confirm('Tem a certeza que quer apagar este livro?')) {
-      const books = JSON.parse(localStorage.getItem('books') || '[]');
+      const books = JSON.parse(localStorage.getItem('books') || '[]'); //recebe o livro
       
-      const updatedBooks = books.filter((b: Book) => b.id !== this.bookId);
+      const updatedBooks = books.filter((b: Book) => b.id !== this.bookId); //remove o livro que dê match ao id
       
-      localStorage.setItem('books', JSON.stringify(updatedBooks));
+      localStorage.setItem('books', JSON.stringify(updatedBooks)); //guarda tudo de novo
       
       console.log("Book deleted")
 

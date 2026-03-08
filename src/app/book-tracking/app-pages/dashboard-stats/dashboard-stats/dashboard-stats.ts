@@ -37,28 +37,28 @@ export class DashboardStats implements OnInit {
     this.stats.averageRating = this.calcAverageRating();
   }
 
-  private getBooks(): Book[] {  
+  private getBooks(): Book[] {  //vai buscar todos os livros
     return JSON.parse(localStorage.getItem('books') || '[]');
   }
 
-  private getFinishedBooks(): Book[] {
+  private getFinishedBooks(): Book[] { //vai buscar os livros lidos
     return this.getBooks().filter(book => book.status === 'Finished');
   }
 
-  calcTotalBooks(): number {
+  calcTotalBooks(): number { 
     return this.getBooks().length;
   }
 
   calcFinishedBooks(): number {
-    return this.getFinishedBooks().length;
+    return this.getFinishedBooks().length; //guarda o valor do tamanho do array que a função de cima devolve
   }
 
-  calcToReadBooks(): number {
-    return this.getBooks().filter(book => book.status === 'To Read').length;
+  calcToReadBooks(): number { 
+    return this.getBooks().filter(book => book.status === 'To Read').length; //filtra pelos livros a ler e guarda o valor do tamanho
   }
 
   calcReadingBooks(): number {
-    return this.getBooks().filter(book => book.status === 'Reading').length;
+    return this.getBooks().filter(book => book.status === 'Reading').length; //filtra pelos livros a ser lidos e guarda o valor do tamanho
   }
 
   calcAverageRating(): number | null {
@@ -68,12 +68,12 @@ export class DashboardStats implements OnInit {
       return null;
     }
     
-    const soma = finishedBooks.reduce((total, book) => {
-      const ratingNumber = Number(book.rating) || 0;  
-      return total + ratingNumber;
-    }, 0);
+    const soma = finishedBooks.reduce((total, book) => { //percorre todos os livros terminados e por cada livro
+      const ratingNumber = Number(book.rating) || 0;  // converte rating em numero
+      return total + ratingNumber; //soma e continua
+    }, 0); //total começa a zero
     
-    const media = soma / finishedBooks.length;
-    return parseFloat(media.toFixed(1));
+    const media = soma / finishedBooks.length; //recebe a soma de cima e divide pelo numero de livros acabados
+    return parseFloat(media.toFixed(1)); //mostra uma casa decimal 
   }
 }

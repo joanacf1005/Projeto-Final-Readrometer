@@ -20,11 +20,11 @@ enum BookFilter {
 })
 
 export class BookGallery implements OnInit {
-  allBooks: Book[] = [];
-  filteredBooks: Book[] = [];
-  currentFilter: BookFilter = BookFilter.ALL; 
+  allBooks: Book[] = []; //todos os livros
+  filteredBooks: Book[] = []; // todos os livros filtrados
+  currentFilter: BookFilter = BookFilter.ALL;  // Filtro ativo
 
-  isFiltersOpen = false;
+  isFiltersOpen = false; // Menu filtros mobile
   
   currentPage = 1;
   itemsPerPage = 6;
@@ -36,14 +36,15 @@ export class BookGallery implements OnInit {
   constructor(private router: Router) {}
 
   get totalPages(): number {
-    return Math.ceil(this.filteredBooks.length / this.itemsPerPage);
+    return Math.ceil(this.filteredBooks.length / this.itemsPerPage); 
   }
 
   get currentBooks(): Book[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.filteredBooks.slice(start, end);
+    const start = (this.currentPage - 1) * this.itemsPerPage; //1o livro a ser mortrado ex: start = 0
+    const end = start + this.itemsPerPage; //ultimo livro a ser mostrado ex: end = 6
+    return this.filteredBooks.slice(start, end); //mostra a partir do 0, inclusive, até ao 6, excluindo o 6
   }
+    //exemplo: const livros = [0, 1, 2, 3, 4, 5], (livros.slice(1,4)) Resultado: [1, 2, 3] 
   
   
   addNewBook() {
@@ -53,11 +54,12 @@ export class BookGallery implements OnInit {
   
   ngOnInit() {  
     let books = JSON.parse(localStorage.getItem('books') || '[]');
-    books = books.filter((book: Book, index: number, self: Book[]) => 
+
+    books = books.filter((book: Book, index: number, self: Book[]) =>  // remove duplicados pelo Id
       index === self.findIndex((b: Book) => b.id === book.id)
     );
     
-    this.allBooks = books.reverse();
+    this.allBooks = books.reverse(); //inverte a ordem de que são mostrados
     this.filteredBooks = [...books];
   }
 
@@ -95,7 +97,7 @@ export class BookGallery implements OnInit {
   }
 
   getPages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1); 
   }
   
   trackByFn(index: number, book: Book): string {

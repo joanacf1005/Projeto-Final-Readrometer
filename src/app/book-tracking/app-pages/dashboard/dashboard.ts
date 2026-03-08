@@ -18,7 +18,7 @@ export class Dashboard implements OnInit {
   goToBookDetails(bookId: string | undefined) {
     if (bookId) {
       console.log('Indo para:', bookId);
-      this.router.navigate(['/books', bookId]);  // ← /books/[ID]
+      this.router.navigate(['/books', bookId]); 
     }
   }
 
