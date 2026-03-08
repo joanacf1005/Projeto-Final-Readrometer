@@ -212,4 +212,70 @@ button[type="submit"]:active {
   transform: translateY(0);
 }
 
+/* RESPONSIVO */
 
+@media (max-width: 1024px) {
+
+  .add-book-page {
+    padding: 1.5rem;
+  }
+
+  .form-container {
+    gap: 2rem;
+  }
+
+  .add-book-page h1 {
+    font-size: 2rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .add-book-page {
+    padding: 1rem;
+  }
+
+  .form-global-container {
+    padding: 1.5rem;
+  }
+
+  .form-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-left,
+  .form-right {
+    width: 100%;
+  }
+
+  .add-book-page h1 {
+    font-size: 1.8rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .add-book-page h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-global-container {
+    padding: 1.25rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 0.95rem;
+    padding: 0.9rem 1rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+  }
+
+}

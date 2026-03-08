@@ -191,3 +191,72 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(113, 108, 180, 0.3);
 }
+
+/* RESPONSIVO  */
+
+@media (max-width: 1024px) {
+
+    .book-detail-page {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .book-detail-card {
+        gap: 1.5rem;
+        padding: 2rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .book-detail-page {
+        max-width: 90%;
+        padding: 1rem;
+    }
+
+    .book-detail-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .book-cover-section {
+        width: 140px;
+        height: 210px;
+    }
+
+    .book-info-section {
+        padding: 1rem 0;
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    .book-details-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .book-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .book-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .book-author,
+    .book-edition {
+        font-size: 0.9rem;
+    }
+
+    .description-title {
+        font-size: 1rem;
+    }
+
+}

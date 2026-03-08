@@ -16,6 +16,14 @@
     </button>
   </nav>
 
+  <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle menu">☰</button>
   
+  <nav class="nav-mobile" [class.active]="isMenuOpen">
+    <button class="nav-link" (click)="goDashboard(); toggleMenu()">Dashboard</button>
+    <button class="nav-link" (click)="goLibrary(); toggleMenu()">Library</button>
+    <button class="theme-toggle" (click)="toggleTheme()"> 
+      @if (isDarkMode) { ☀️ } @else { 🌕 }
+    </button>
+  </nav>
 
 </header>

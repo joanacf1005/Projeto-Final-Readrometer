@@ -1,55 +1,59 @@
 <section class="book-gallery" aria-label="Library">
-  
-  <div class="gallery-header">
-    <div class="gallery-header-buttons">
-      <button class="filter-btn" [class.active]="currentFilter === 'all'" (click)="filterBooks('all')">All Books</button>
-      <button class="filter-btn" [class.active]="currentFilter === 'finished'"(click)="filterBooks('finished')">Finished</button>    
-      <button class="filter-btn" [class.active]="currentFilter === 'toRead'"(click)="filterBooks('toRead')">To Read</button>
-      <button class="filter-btn" [class.active]="currentFilter === 'reading'"(click)="filterBooks('reading')">In Progress</button>
-      <button class="btn-add" type="button" (click)="addNewBook()">Add New Book</button>
 
+  <aside class="filters-sidebar" [class.open]="isFiltersOpen">
+    <div class="filter-group">
+      <button class="btn-close" (click)="toggleFilters()" aria-label="Close filters">×</button>
+      <h3>Filter Books</h3>
+      <button class="filter-btn" [class.active]="currentFilter === 'all'" (click)="filterBooks('all'); toggleFilters()">All Books</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'finished'" (click)="filterBooks('finished'); toggleFilters()">Finished</button>     
+      <button class="filter-btn" [class.active]="currentFilter === 'toRead'" (click)="filterBooks('toRead'); toggleFilters()">To Read</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'reading'" (click)="filterBooks('reading'); toggleFilters()">In Progress</button>
     </div>
-  </div>
+  </aside>
 
-  <div class="books-grid">
-     @for (book of currentBooks; track trackByFn($index, book); let i = $index) {
-      <a [routerLink]="['/books', book.id || i]" class="book-card-link">
-        <div class="book-card" [attr.data-status]="book.status">
-          <div class="book-image">
-            <img [src]="book.photo || 'assets/images/default-book.png'" [alt]="book.title">
-          </div>
-          
-          <div class="book-info">
-            <h3>{{ book.title }}</h3>
-            <p class="author">{{ book.author }}</p>
-            <span class="status"
-              [class.status-to-read]="book?.status === 'To Read'"
-              [class.status-reading]="book?.status === 'Reading'"
-              [class.status-finished]="book?.status === 'Finished'">
-                {{ book?.status }}
-            </span>
-          </div>
-        </div>
-      </a>
-    } 
-  </div>
-
-
-  @if (filteredBooks.length > itemsPerPage) {
-    <div class="pagination-container">
-      <div class="pagination">
-        <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-btn">← Previous </button>
-        
-        @for (page of getPages(); track page) {
-          <button class="pagination-btn" [class.active]="page === currentPage" (click)="goToPage(page)">{{ page }}</button>
-        }
-        
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-btn"> Next →</button>
-      </div>
+  <div class="gallery-main">
+    
+    <div class="add-book-section">
+      <button class="btn-add" (click)="addNewBook()">Add New Book</button>
       
-      <div class="page-info">
-        Page {{ currentPage }} of {{ totalPages }} ({{ filteredBooks.length }} total)
-      </div>
+      <button class="btn-filters" (click)="toggleFilters()" aria-label="Filters">Filters</button>
     </div>
-  }
+
+    <div class="books-grid">
+      @for (book of currentBooks; track trackByFn($index, book); let i = $index) {
+        <a [routerLink]="['/books', book.id || i]" class="book-card-link">
+         <div class="book-card" [attr.data-status]="book.status">
+           <div class="book-image">
+             <img [src]="book.photo || 'assets/images/default-book.png'" [alt]="book.title">
+           </div>
+           <div class="book-info">
+             <h3>{{ book.title }}</h3>
+             <p class="author">{{ book.author }}</p>
+             <span class="status"
+               [class.status-to-read]="book?.status === 'To Read'"
+               [class.status-reading]="book?.status === 'Reading'"
+               [class.status-finished]="book?.status === 'Finished'">
+               {{ book?.status }}
+             </span>
+           </div>
+         </div>
+        </a>
+      } 
+    </div>
+
+    @if (filteredBooks.length > itemsPerPage) {
+      <div class="pagination-container">
+        <div class="pagination">
+         <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-btn">← Previous</button>
+         @for (page of getPages(); track page) {
+           <button class="pagination-btn" [class.active]="page === currentPage" (click)="goToPage(page)">{{ page }}</button>
+         }
+         <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-btn">Next →</button>
+        </div>
+        <div class="page-info">
+          Page {{ currentPage }} of {{ totalPages }} ({{ filteredBooks.length }} total)
+        </div>
+      </div>
+    }
+  </div>
 </section>

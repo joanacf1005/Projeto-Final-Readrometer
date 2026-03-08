@@ -10,6 +10,12 @@ export class Header implements OnInit {
   constructor(private router: Router) {}
 
   isDarkMode = false;
+  isMenuOpen = false;  
+
+  toggleMenu() {       
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {

@@ -24,8 +24,14 @@ export class BookGallery implements OnInit {
   filteredBooks: Book[] = [];
   currentFilter: BookFilter = BookFilter.ALL; 
 
+  isFiltersOpen = false;
+  
   currentPage = 1;
   itemsPerPage = 6;
+
+  toggleFilters() {
+    this.isFiltersOpen = !this.isFiltersOpen;
+  }
 
   constructor(private router: Router) {}
 
