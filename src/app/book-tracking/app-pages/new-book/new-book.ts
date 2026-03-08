@@ -39,7 +39,7 @@ export class NewBook implements OnInit{
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void { //página carrega, lê URL para perceber se tem ID nele ou não, se sim corre o metodo loadBookToEdit()
     const urlParts = window.location.pathname.split('/');
     
     const idIndex = urlParts.indexOf('new-book');
@@ -53,7 +53,7 @@ export class NewBook implements OnInit{
     }
   }
 
-  loadBookToEdit(): void { 
+  loadBookToEdit(): void { //carrega o livro da LS, procura o ID e se encontrar preenche os campos do form
     const books = JSON.parse(localStorage.getItem('books') || '[]');
     
     const book = books.find((b: Book) => b.id === this.editingBookId);
@@ -65,7 +65,7 @@ export class NewBook implements OnInit{
     }
   }
 
-  get showRatingAndDate() {
+  get showRatingAndDate() { 
     return this.form.get('status')?.value === 'Finished';
   }
 
@@ -90,11 +90,11 @@ export class NewBook implements OnInit{
         };
         
         // Atualiza o livro existente
-        const updatedBooks = books.map((b: Book) => 
-          b.id === this.editingBookId ? bookData : b
+        const updatedBooks = books.map((b: Book) => //o msp percorre todos os livros, compara o ID e substitui ou mantem 
+          b.id === this.editingBookId ? bookData : b 
         );
         
-        localStorage.setItem('books', JSON.stringify(updatedBooks));
+        localStorage.setItem('books', JSON.stringify(updatedBooks)); //guarda o livro
         console.log('Book Updated:', bookData);
         
       } else {
@@ -102,7 +102,7 @@ export class NewBook implements OnInit{
         console.log('New Book');
         
         const newBook: Book = {
-          id: crypto.randomUUID(),
+          id: crypto.randomUUID(), // Universally Unique Identifier (UUID) para gerar ID unico
           title: this.form.value.title || "",
           author: this.form.value.author || "",
           edition: this.form.value.edition || "",
@@ -114,7 +114,7 @@ export class NewBook implements OnInit{
         };
         
         //Adiciona se não existir
-        const exists = books.some((b: Book) => b.id === newBook.id);
+        const exists = books.some((b: Book) => b.id === newBook.id); //percorre todos os livros e para no primeiro true
         if (!exists) {
           books.push(newBook);
           localStorage.setItem('books', JSON.stringify(books));
@@ -122,7 +122,7 @@ export class NewBook implements OnInit{
         }
       }
       
-      window.location.href = '/books';
+      this.router.navigate(['/books']);
       
     } else {
       this.form.markAllAsTouched();
