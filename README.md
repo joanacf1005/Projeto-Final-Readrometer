@@ -1,59 +1,101 @@
-# Readrometer
+## Projeto Final - Readrometer, Gestão de Livros
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+Este projeto foi feito com recurso às tecnologias: Angular CLI version 21.2.0.
 
-## Development server
+## Aluno
 
-To start a local development server, run:
+Aluno: Joana Freitas
+UFCD: Programação JavaScript
+Framework: Angular
+Linguagem: TypeScript
 
-```bash
-ng serve
-```
+## Descrição
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Projeto Final da disciplina de Programação em JavaScript. 
+Consiste numa Single Page Application desenvolvida em Angular para gerir a leitura pessoal de livros.
+Permite adicionar, visualizar, editar, remover e filtrar livros. 
 
-## Code scaffolding
+## Funcionalidades
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Header:
+    -Navegação para Dashboard;
+    -Navegação para Galeria de livros;
+    -Mudança de tema (escuro ou claro);
 
-```bash
-ng generate component component-name
-```
+Dashboard: 
+    -Último livro adicionado:
+        -Navegação para Detalhes do Livro;
+    -Kpis em tempo real:
+        -Total de livros com navegação para a Galeria de Livros;
+        -Total de livros lidos;
+        -Total de livros a ler;
+        -Total de livros a serem lidos;
+        -Média de avaliação de livros lidos;
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Galeria:
+    -Lista todos os livros:
+        -Cada livro com navegação para Detalhes do Livro;
+    -Filtra por estado (a ler/lido/por ler);
+    -Navegação para adicionar livros;
+    -Paginação;
 
-```bash
-ng generate --help
-```
+Detalhes do Livro:
+    -Informação completa de cada livro;
+    -Edição com navegação para Edição de Livro;
+    -Apagar livro;
+    -Navegação para Galeria de Livros;
 
-## Building
+Adicionar Livro:
+    -Formulário com campos obrigatórios e informação sobre cada campo(formato);
+    -Navegação de volta para a Galeria de Livros;
 
-To build the project run:
+Armazenamento de dados em LocalStorage;
 
-```bash
-ng build
-```
+## Instalação e execução
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+clonar repositório:
 
-## Running unit tests
+    git clone https://github.com/joanacf1005/Projeto-Final-Readrometer.git
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Entrar na pasta do projeto:
 
-```bash
-ng test
-```
+    cd readrometer
 
-## Running end-to-end tests
+Instalar dependências:
 
-For end-to-end (e2e) testing, run:
+    npm install 
 
-```bash
-ng e2e
-```
+Executar a aplicação:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+    ng serve
 
-## Additional Resources
+## Estrutura do Projeto
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+readrometer/
+├── src/
+│   ├── app/
+│   │   ├── book-tracking/
+│   │   │   ├── app-pages/
+│   │   │   │   ├── dashboard/                 ← Último livro adicionado
+│   │   │   │   ├── book-gallery/              ← Add New Book, paginação, filtros
+│   │   │   │   ├── new-book/                  ← ADD/EDIT com título dinâmico
+│   │   │   │   ├── book-details/              ← Detalhes, botão editar e apagar
+│   │   │   │   └── dashboard-stats/           ← Estatísticas
+│   │   │   └── app.routes.ts                  ← Rotas 
+│   │   ├── shared-across-app/
+│   │   │   ├── footer/                        ← Rodapé global
+│   │   │   └── header/                        ← Cabeçalho global
+│   │   └── app.ts/html/scss                   
+│   ├── index.html                             
+│   └── styles.css                             ← Global styles
+├── angular.json                               
+├── package.json                              
+├── tsconfig.json                             
+└── README.md                                  
+
+## Futuras Implementações
+
+Perfil de utilizador;
+Pesquisa com filtros diferentes (como categoria, nome);
+Ordenação por ordem alfabética;
+Mais campos de formulário;
