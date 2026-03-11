@@ -3,11 +3,11 @@
   <h1>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h1>
 
   
-  <form [formGroup]="form" (ngSubmit)="saveBook()" class="form-global-container">
+  <!-- <form [formGroup]="form" (ngSubmit)="saveBook()" class="form-global-container">
     <div class="form-container">
       <div class="form-left">
-        <div class="form-group">
-          <label>Title:</label>
+        <div class="form-group"> -->
+          <!-- <label>Title:</label>
           <input formControlName="title" placeholder="Book Title">
           @if (form.get('title')?.invalid && form.get('title')?.touched) {
             <p class="error">Title required and must have at least 3 chars.</p>
@@ -86,13 +86,13 @@
           <div class="form-group">
             <label for="completionDate">Completion Date</label>
             <input id="completionDate" type="date" formControlName="completionDate" class="date-input">
-          </div>
-        } 
-      </div>
+          </div> -->
+        <!-- }  -->
+      <!-- </div>
     </div>
     <div class="form-actions">
         <button type="submit">Save Book</button>
-    </div>
-  </form>
+    </div> -->
+  <!-- </form> -->
 </div>
 

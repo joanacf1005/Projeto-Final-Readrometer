@@ -33,7 +33,7 @@ export class BookGallery implements OnInit {
     this.isFiltersOpen = !this.isFiltersOpen;
   }
 
-  constructor(private router: Router) {}
+  private router = inject(Router) 
 
   get totalPages(): number {
     return Math.ceil(this.filteredBooks.length / this.itemsPerPage); 

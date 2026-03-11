@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class Dashboard implements OnInit {
   lastBook: Book | null = null;
 
-  constructor(private router: Router) {}
+  private router = inject(Router)
 
   goToBookDetails(bookId: string | undefined) {
     if (bookId) {

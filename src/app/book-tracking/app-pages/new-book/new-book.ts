@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+// import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 export interface Book {
   id: string;
@@ -37,7 +38,8 @@ export class NewBook implements OnInit{
   isEditMode = false; 
   editingBookId = '';  
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  
+  // constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void { //página carrega, lê URL para perceber se tem ID nele ou não, se sim corre o metodo loadBookToEdit()
     const urlParts = window.location.pathname.split('/');
