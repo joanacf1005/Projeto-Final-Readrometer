@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from './shared-across-app/components/header/header/header';
 import { Footer } from './shared-across-app/components/footer/footer';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../environments/environment.development';
+import { SupabaseService } from './services/supabase'; 
 
 @Component({
   selector: 'app-root',
@@ -15,87 +15,111 @@ import { environment } from '../environments/environment.development';
 export class App {
   protected readonly title = signal('readrometer');
   
-  // Login/Register state
   username = '';
   password = '';
   registerMode = false;
   isLoggedIn = false;
   userNameDisplay = '';
 
-   constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private supabaseService: SupabaseService
+  ) {
+    this.checkExistingSession();
+  }
+
+  private async checkExistingSession() {
+    try {
+      const { data: { session } } = await this.supabaseService.getSession();
+      if (session?.user) {
+        this.isLoggedIn = true;
+        this.userNameDisplay = `, ${session.user.username || session.user.email || 'User'}`;
+        this.loadData();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   async login() {
-    console.log('🔥 LOGIN CLICADO!', this.username, this.password); // ← ADICIONE
-    
     if (!this.username || !this.password) {
-      alert('Fill in the fields!');
+      alert('Fill in all the input fields!');
       return;
     }
 
     try {
-      console.log('🌐 Fazendo fetch para:', `${environment.apiUrl}/users?username=${this.username}&password=${this.password}`);
-      const resp = await fetch(`${environment.apiUrl}/users?username=${this.username}&password=${this.password}`);
-      const users = await resp.json();
-      console.log('📊 Usuários encontrados:', users); // ← ADICIONE
+      const { data, error } = await this.supabaseService.login(
+        this.username, 
+        this.password
+      );
 
-      if (users && users.length > 0) {
-        console.log('✅ LOGIN OK!');
-        this.isLoggedIn = true;
-        this.userNameDisplay = `, ${users[0].username}`;
-        this.loadData();
-        this.cdr.detectChanges();
-      } else {
-        alert('Username or password incorrect!');
-      }
-    } catch (error) {
-      console.error('❌ ERRO:', error);
-      alert('API connection error. Check if json-server is running.');
-    }
-  }
-
-
-  async createAccount() {
-    if (!this.username || !this.password) return;
-
-    try {
-      const check = await fetch(`${environment.apiUrl}/users?username=${this.username}`);
-      const existing = await check.json();
-
-      if (existing.length > 0) {
-        alert('This user already exists!');
+      if (error || !data) {
+        console.error('Login error:', error);
+        alert('Incorrect Username or Password');
         return;
       }
 
-      await fetch(`${environment.apiUrl}/users`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        })
-      });
+      this.isLoggedIn = true;
+      this.userNameDisplay = `, ${data.username}`;
+      this.loadData();
+      this.cdr.detectChanges();
+    } catch (error) {
+      console.error('ERROR:', error);
+      alert('Connection error.');
+    }
+  }
 
-      alert('Account created successfully!');
+  async createAccount() {
+    if (!this.username || !this.password) {
+      alert('Fill in all the input fields!');
+      return;
+    }
+
+    try {
+      const { data, error } = await this.supabaseService.createAccount(
+        this.username, 
+        this.password
+      );
+
+      if (error || !data) {
+        console.error('Error creating account:', error);
+        alert(error?.message || 'Error creating account!');
+        return;
+      }
+
+      alert('Account Created!');
       this.registerMode = false;
-    } catch {
-      alert('Error creating new user.');
+      this.username = '';
+      this.password = '';
+      this.cdr.detectChanges();
+    } catch (error) {
+      console.error('ERROR:', error);
+      alert('Error creating account.');
+    }
+  }
+
+  async logout() {
+    try {
+      await this.supabaseService.signOut();
+    } catch (error) {
+      console.error('Logout Error:', error);
+    } finally {
+      this.isLoggedIn = false;
+      this.username = '';
+      this.password = '';
+      this.userNameDisplay = '';
+      this.cdr.detectChanges();
     }
   }
 
   loadData() {
-    console.log('Data loaded for:', this.userNameDisplay);
+    const books = JSON.parse(localStorage.getItem('books') || '[]');
+    console.log('Books loaded:', books.length, 'for', this.userNameDisplay);
   }
 
   toggleRegisterMode() {
     this.registerMode = !this.registerMode;
     this.username = '';
     this.password = '';
-  }
-
-  logout() {
-    this.isLoggedIn = false;
-    this.username = '';
-    this.password = '';
-    this.userNameDisplay = '';
   }
 }

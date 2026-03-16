@@ -1,5 +1,5 @@
 .login-container {
-  max-width: 400px;
+  max-width: 40%;
   margin: 4rem auto;
   padding: 2.5rem;
   background: var(--fundo-cartoes);
@@ -17,12 +17,12 @@
 }
 
 .form-input {
-  width: 100%;
+  width: 88%;
   padding: 1rem 1.25rem;
   margin-bottom: 1.5rem;
   border: 2px solid transparent;
   border-radius: 12px;
-  background: rgba(255,255,255,0.8);
+  background: var(--fundo-cartoes);
   font-size: 1rem;
   transition: all 0.3s ease;
   color: var(--texto-principal);
@@ -32,7 +32,7 @@
   outline: none;
   border-color: var(--botao-primario);
   box-shadow: 0 0 0 3px rgba(177, 173, 232, 0.1);
-  background: white;
+  background: var(--fundo-cartoes);
 }
 
 .button-group {
@@ -53,7 +53,7 @@
 
 .button-group button:first-child {
   background: var(--botao-primario);
-  color: white;
+  color: var(--fundo-cartoes);
 }
 
 .button-group button:first-child:hover:not(:disabled) {
@@ -70,7 +70,7 @@
 
 .button-group button:last-child {
   background: var(--botoes-secundarios);
-  color: var(--texto-principal);
+  color: var(--titulos);
 }
 
 .button-group button:last-child:hover {
@@ -93,7 +93,7 @@
 .logged-in button {
   padding: 1rem 2rem;
   background: var(--delete-btn);
-  color: white;
+  color: var(--fundo-cartoes);
   border: none;
   border-radius: 12px;
   font-size: 1rem;
@@ -103,7 +103,7 @@
 }
 
 .logged-in button:hover {
-  background: color-mix(in srgb, var(--delete-btn) 90%, black);
+  background: var(--botao-hover);
   transform: translateY(-2px);
 }
 
