@@ -54,18 +54,22 @@ export class BookGallery implements OnInit {
 
   
   ngOnInit() {  
-    fetch('http://localhost:3001/books')
-      .then(response => response.json())
-      .then(books => {
-        books = books.filter((book: Book, index: number, self: Book[]) => 
-          index === self.findIndex((b: Book) => b.id === book.id)
-        );
-        
-        this.allBooks = books.reverse();
-        this.filteredBooks = [...books];
-      })
-      .catch(err => console.error('Erro:', err));
+    try {
+      let books = JSON.parse(localStorage.getItem('books') || '[]');
+      
+      books = books.filter((book: Book, index: number, self: Book[]) => 
+        index === self.findIndex((b: Book) => b.id === book.id)
+      );
+      
+      this.allBooks = books.reverse();
+      this.filteredBooks = [...books];
+    } catch (err) {
+      console.error('Erro ao carregar livros:', err);
+      this.allBooks = [];
+      this.filteredBooks = [];
+    }
   }
+
 
 
   filterBooks(filter: string) { 
