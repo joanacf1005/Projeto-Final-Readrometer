@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardStats } from '../dashboard-stats/dashboard-stats/dashboard-stats';
 import { Book } from '../new-book/new-book';
 import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',

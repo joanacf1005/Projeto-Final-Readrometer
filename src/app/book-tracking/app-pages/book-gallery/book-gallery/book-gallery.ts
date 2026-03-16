@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterLink, Router } from '@angular/router';
 import { Book } from '../../new-book/new-book';
+import { inject } from '@angular/core';
 
 
 enum BookFilter {
@@ -53,15 +54,19 @@ export class BookGallery implements OnInit {
 
   
   ngOnInit() {  
-    let books = JSON.parse(localStorage.getItem('books') || '[]');
-
-    books = books.filter((book: Book, index: number, self: Book[]) =>  // remove duplicados pelo Id
-      index === self.findIndex((b: Book) => b.id === book.id)
-    );
-    
-    this.allBooks = books.reverse(); //inverte a ordem de que são mostrados
-    this.filteredBooks = [...books];
+    fetch('http://localhost:3001/books')
+      .then(response => response.json())
+      .then(books => {
+        books = books.filter((book: Book, index: number, self: Book[]) => 
+          index === self.findIndex((b: Book) => b.id === book.id)
+        );
+        
+        this.allBooks = books.reverse();
+        this.filteredBooks = [...books];
+      })
+      .catch(err => console.error('Erro:', err));
   }
+
 
   filterBooks(filter: string) { 
     this.currentFilter = filter as BookFilter;  

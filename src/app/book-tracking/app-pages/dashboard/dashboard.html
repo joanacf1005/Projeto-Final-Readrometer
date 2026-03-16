@@ -3,7 +3,7 @@
     <h2>Last Added Tale</h2>
     
     @if (lastBook) {
-      <!-- <section class="featured-book" (click)="goToBookDetails(lastBook?.id)">
+      <section class="featured-book" (click)="goToBookDetails(lastBook.id)">
         <div class="book-cover">
           <img [src]="lastBook.photo" [alt]="'Book Cover of ' + lastBook.title">
         </div>
@@ -15,7 +15,7 @@
               <p class="status-text">You rated this book: {{ lastBook.rating }}/5 💜</p>
             } 
         </div>
-      </section> -->
+      </section>
     } @else {
       <div class="no-book-yet">
         <p>No adventures yet</p>

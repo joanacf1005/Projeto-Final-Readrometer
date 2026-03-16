@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Book } from '../../new-book/new-book';
 import { Router, RouterLink} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { inject } from '@angular/core'
 
 
 @Component({
