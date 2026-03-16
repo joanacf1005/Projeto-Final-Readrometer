@@ -1,9 +1,10 @@
 import { Component, signal, ChangeDetectorRef } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { Header } from './shared-across-app/components/header/header/header';
 import { Footer } from './shared-across-app/components/footer/footer';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment.development';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,9 @@ export class App {
 
    constructor(private cdr: ChangeDetectorRef) {}
 
+    private router = inject(Router);
+
   async login() {
-    console.log('🔥 LOGIN CLICADO!', this.username, this.password); // ← ADICIONE
     
     if (!this.username || !this.password) {
       alert('Fill in the fields!');
@@ -33,25 +35,26 @@ export class App {
     }
 
     try {
-      console.log('🌐 Fazendo fetch para:', `${environment.apiUrl}/users?username=${this.username}&password=${this.password}`);
       const resp = await fetch(`${environment.apiUrl}/users?username=${this.username}&password=${this.password}`);
       const users = await resp.json();
-      console.log('📊 Usuários encontrados:', users); // ← ADICIONE
 
       if (users && users.length > 0) {
-        console.log('✅ LOGIN OK!');
         this.isLoggedIn = true;
         this.userNameDisplay = `, ${users[0].username}`;
         this.loadData();
+        
+        await this.router.navigate(['/']);  
+        
         this.cdr.detectChanges();
       } else {
         alert('Username or password incorrect!');
       }
     } catch (error) {
-      console.error('❌ ERRO:', error);
+      console.error('ERROR:', error);
       alert('API connection error. Check if json-server is running.');
     }
-  }
+}
+
 
 
   async createAccount() {

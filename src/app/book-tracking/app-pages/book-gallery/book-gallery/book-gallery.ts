@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterLink, Router } from '@angular/router';
 import { Book } from '../../new-book/new-book';
-import { inject } from '@angular/core';
 
 
 enum BookFilter {
@@ -34,7 +33,7 @@ export class BookGallery implements OnInit {
     this.isFiltersOpen = !this.isFiltersOpen;
   }
 
-  private router = inject(Router) 
+  constructor(private router: Router) {}
 
   get totalPages(): number {
     return Math.ceil(this.filteredBooks.length / this.itemsPerPage); 
@@ -54,19 +53,15 @@ export class BookGallery implements OnInit {
 
   
   ngOnInit() {  
-    fetch('http://localhost:3001/books')
-      .then(response => response.json())
-      .then(books => {
-        books = books.filter((book: Book, index: number, self: Book[]) => 
-          index === self.findIndex((b: Book) => b.id === book.id)
-        );
-        
-        this.allBooks = books.reverse();
-        this.filteredBooks = [...books];
-      })
-      .catch(err => console.error('Erro:', err));
-  }
+    let books = JSON.parse(localStorage.getItem('books') || '[]');
 
+    books = books.filter((book: Book, index: number, self: Book[]) =>  // remove duplicados pelo Id
+      index === self.findIndex((b: Book) => b.id === book.id)
+    );
+    
+    this.allBooks = books.reverse(); //inverte a ordem de que são mostrados
+    this.filteredBooks = [...books];
+  }
 
   filterBooks(filter: string) { 
     this.currentFilter = filter as BookFilter;  
