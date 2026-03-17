@@ -92,7 +92,7 @@
 
 .logged-in button {
   padding: 1rem 2rem;
-  background: var(--delete-btn);
+  background: var(--status-toRead);
   color: var(--fundo-cartoes);
   border: none;
   border-radius: 12px;
@@ -103,7 +103,7 @@
 }
 
 .logged-in button:hover {
-  background: var(--botao-hover);
+  background: var(--delete-btn);
   transform: translateY(-2px);
 }
 
