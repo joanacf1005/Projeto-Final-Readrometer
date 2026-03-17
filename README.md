@@ -4,7 +4,7 @@
 ![Supabase](https://img.shields.io/badge/Supabase-blueviolet?logo=supabase&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-brightgreen?logo=docker&logoColor=white)
 
-![CI](https://github.com/joanacf1005/Projeto-Final-Readrometer/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/joanacf1005/Projeto-Final-Readrometer/actions/workflows/ci.yml/badge.svg)](https://github.com/joanacf1005/Projeto-Final-Readrometer/actions/workflows/ci.yml)
 
 Este projeto foi feito com recurso às tecnologias: Angular CLI version 21.2.0.
 
