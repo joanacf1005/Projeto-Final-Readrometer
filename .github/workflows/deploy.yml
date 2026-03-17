@@ -1,11 +1,18 @@
 name: Deploy gh-pages
+
 on:
   push:
     branches: [final-main]
 
+permissions:
+  contents: write    # precisa disto para fazer push na gh-pages
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
     - uses: actions/checkout@v4
       with:
