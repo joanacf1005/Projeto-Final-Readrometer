@@ -3,8 +3,6 @@ name: CI/CD - Build e Deploy Angular para GitHub Pages
 on:
   push:
     branches: [ final-main ]
-  pull_request:
-    branches: [ final-main ]
   workflow_dispatch:
 
 jobs:
