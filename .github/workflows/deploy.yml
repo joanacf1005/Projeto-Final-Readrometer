@@ -19,7 +19,6 @@ jobs:
           
       - run: npm ci
       
-      # Gera environments para Angular
       - name: Generate environment files
         run: |
           mkdir -p src/environments
@@ -30,27 +29,16 @@ jobs:
             supabaseKey: '${SUPABASE_KEY}'
           };
           EOF
-          cat > src/environments/environment.development.ts <<EOF
-          export const environment = {
-            production: false,
-            supabaseUrl: '${SUPABASE_URL}',
-            supabaseKey: '${SUPABASE_KEY}'
-          };
-          EOF
       
-      # Build Angular com base-href correto para GitHub Pages
       - name: Build Angular
-        run: npm run build -- --base-href=./
+        run: npm run build
       
-      # Configura SPA routing + desativa Jekyll
       - name: Prepare GitHub Pages
         run: |
-          cd /dist/readrometer/browser
+          cd dist/readrometer/browser
           cp index.html 404.html
-          sed -i 's|<base href="./">|<base href="/">|g' index.html
           touch .nojekyll
       
-      # Deploy para gh-pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
