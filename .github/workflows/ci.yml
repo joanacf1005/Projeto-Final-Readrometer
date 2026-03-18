@@ -48,5 +48,9 @@ jobs:
       - name: Executar lint
         run: npm run lint
 
+      - name: Wait for status
+        run: sleep 2
+      
       - name: Executar build
         run: npm run build
+
