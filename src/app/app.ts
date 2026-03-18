@@ -124,6 +124,4 @@ export class App {
   }
 }
 
-// let no = "!";
-
-let yes = "?"
+// let yes = "?"
