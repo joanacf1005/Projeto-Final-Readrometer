@@ -2,7 +2,7 @@ name: Deploy Angular to GitHub Pages
 
 on:
   push:
-    branches: [ "feature/deploy" ]  
+    branches: [ "feature/deploy" ]
 
 permissions:
   contents: write
@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4  # Fixed: v5 → v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -54,7 +54,7 @@ jobs:
           cp index.html 404.html
 
       - name: Publicar no GitHub Pages
-        uses: peaceiris/actions-gh-pages@v5
+        uses: peaceiris/actions-gh-pages@v4  
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/readrometer
