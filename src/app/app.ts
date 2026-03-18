@@ -124,5 +124,5 @@ export class App {
   }
 }
 
-let yes = "?"
-let no = "!"
+// let yes = "?"
+// let no = "!"
