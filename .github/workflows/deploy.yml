@@ -12,10 +12,14 @@ jobs:
       SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          
       - run: npm ci
+      
+      # Gera environments para Angular
       - name: Generate environment files
         run: |
           mkdir -p src/environments
@@ -33,15 +37,25 @@ jobs:
             supabaseKey: '${SUPABASE_KEY}'
           };
           EOF
-      - run: npm run build -- --base-href=/Projeto-Final-Readrometer/
-      - run: |
-          cd docs/browser
+      
+      # Build Angular com base-href correto para GitHub Pages
+      - name: Build Angular
+        run: npm run build -- --base-href=./
+      
+      # Configura SPA routing + desativa Jekyll
+      - name: Prepare GitHub Pages
+        run: |
+          cd /dist/readrometer/browser
           cp index.html 404.html
+          sed -i 's|<base href="./">|<base href="/">|g' index.html
           touch .nojekyll
-      - uses: peaceiris/actions-gh-pages@v4
+      
+      # Deploy para gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/browser  
+          publish_dir: ./dist/readrometer/browser
           publish_branch: gh-pages
           force_orphan: true
 

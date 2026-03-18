@@ -20,6 +20,7 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "baseHref": "./",
             "assets": [
               {
                 "glob": "**/*",
@@ -30,7 +31,10 @@
             "security": {
               "allowedHosts": []
             },
-            "outputPath": "docs"
+            "outputPath": {
+              "base": "dist/readrometer",
+              "browser": "browser"
+            }
           },
           "configurations": {
             "production": {
