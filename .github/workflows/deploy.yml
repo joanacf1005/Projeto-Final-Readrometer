@@ -16,9 +16,23 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - run: |
+      - name: Generate environment files
+        run: |
           mkdir -p src/environments
-          echo "export const environment = { production: true, supabaseUrl: '${SUPABASE_URL}', supabaseKey: '${SUPABASE_KEY}' };" > src/environments/environment.ts
+          cat > src/environments/environment.ts <<EOF
+          export const environment = {
+            production: true,
+            supabaseUrl: '${SUPABASE_URL}',
+            supabaseKey: '${SUPABASE_KEY}'
+          };
+          EOF
+          cat > src/environments/environment.development.ts <<EOF
+          export const environment = {
+            production: false,
+            supabaseUrl: '${SUPABASE_URL}',
+            supabaseKey: '${SUPABASE_KEY}'
+          };
+          EOF
       - run: npm run build -- --base-href=/Projeto-Final-Readrometer/
       - run: |
           cd docs
@@ -29,6 +43,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-pages
-          user: joanacf1005
-          repo: Projeto-Final-Readrometer
 
