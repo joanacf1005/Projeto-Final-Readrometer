@@ -1,37 +1,28 @@
-name: CI
+name: CI/CD - Build e Deploy Angular para GitHub Pages
 
 on:
-  pull_request:
-    branches:
-      - final-main   
+  push:
+    branches: [ final-main ]
   workflow_dispatch:
 
 jobs:
-  build-and-lint:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
     steps:
-      - name: Checkout do código
+      - name: Checkout
         uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
-
-      - name: Instalar dependências
+      - name: Install dependencies
         run: npm ci
 
       - name: Generate environment.ts
@@ -45,8 +36,15 @@ jobs:
           };
           EOF
 
-      - name: Executar lint
+      - name: Run lint
         run: npm run lint
 
-      - name: Executar build
-        run: npm run build
+      - name: Build Angular app
+        run: npx ng build --configuration production --output-path docs --base-href /Projeto-Final-Readrometer/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
