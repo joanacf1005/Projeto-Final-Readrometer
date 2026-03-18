@@ -27,7 +27,7 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Generate environment files 
+      - name: Generate environment files
         run: |
           mkdir -p src/environments
           cat > src/environments/environment.development.ts <<EOF
@@ -48,10 +48,27 @@ jobs:
       - name: Fazer o Build Angular
         run: npm run build -- --base-href=/Projeto-Final-Readrometer/
 
-      - name: Ajustar index.html e 404 para GitHub Pages
+      - name: DEBUG COMPLETO - Verificar build
         run: |
-          cd ./docs
-          cp index.html 404.html
+          echo "📁 Estrutura após build:"
+          find . -name "*.html" || echo "❌ Nenhum HTML!"
+          echo "📁 Pastas docs/dist:"
+          ls -la docs/ 2>/dev/null || echo "❌ docs vazia"
+          ls -la dist/ 2>/dev/null || echo "❌ dist vazia"
+
+      - name: Ajustar 404.html (auto-detect)
+        run: |
+          if [ -f "docs/index.html" ]; then
+            cd docs && cp index.html 404.html && echo "✅ docs/index.html OK"
+          elif [ -f "docs/browser/index.html" ]; then  
+            cd docs/browser && cp index.html 404.html && echo "✅ docs/browser OK"
+          elif [ -f "dist/readrometer/index.html" ]; then
+            cd dist/readrometer && cp index.html 404.html && echo "✅ dist/readrometer OK"
+          else
+            echo "❌ index.html NÃO ENCONTRADO!"
+            find . -name "index.html"
+            exit 1
+          fi
 
       - name: Publicar no GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
