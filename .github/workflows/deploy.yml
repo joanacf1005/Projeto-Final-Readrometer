@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4  
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -46,15 +46,15 @@ jobs:
           EOF
 
       - name: Fazer o Build Angular
-        run: npm run build -- --base-href=/Projeto-Final-Readrometer/
+        run: npm run build 
 
       - name: Ajustar index.html e 404 para GitHub Pages
         run: |
-          cd ./dist/readrometer
+          cd ./docs          
           cp index.html 404.html
 
       - name: Publicar no GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4  
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
