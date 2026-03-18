@@ -3,8 +3,6 @@ name: Deploy Angular to Vercel
 on:
   push:
     branches: [final-main]
-  pull_request:
-    branches: [final-main]
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -15,10 +13,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,17 +25,6 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Gerar environment.development.ts
-        run: |
-          mkdir -p src/environments
-          cat > src/environments/environment.development.ts << EOF
-          export const environment = {
-            production: false,
-            supabaseUrl: "${{ secrets.SUPABASE_URL }}",
-            supabaseKey: "${{ secrets.SUPABASE_KEY }}"
-          };
-          EOF
-
       - name: Instalar Vercel CLI
         run: npm install --global vercel@latest
 
@@ -49,5 +34,5 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy Project Artifacts to Vercel
+      - name: Deploy Project Artifacts
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
