@@ -46,3 +46,4 @@ src/environments/environment.development.ts
 
 # GitHub Pages output
 /dist
+.vercel
