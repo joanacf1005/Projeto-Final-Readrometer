@@ -27,7 +27,7 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Generate environment files
+      - name: Generate environment files 
         run: |
           mkdir -p src/environments
           cat > src/environments/environment.development.ts <<EOF
@@ -46,11 +46,11 @@ jobs:
           EOF
 
       - name: Fazer o Build Angular
-        run: npm run build 
+        run: npm run build -- --base-href=/Projeto-Final-Readrometer/
 
       - name: Ajustar index.html e 404 para GitHub Pages
         run: |
-          cd ./docs          
+          cd ./docs
           cp index.html 404.html
 
       - name: Publicar no GitHub Pages
