@@ -126,3 +126,4 @@ export class App {
 
 let yes = "?"
 let no = "!"
+let noo = "!"
