@@ -123,3 +123,5 @@ export class App {
     this.password = '';
   }
 }
+
+let no = "!";
