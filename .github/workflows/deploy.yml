@@ -1,78 +1,34 @@
 name: Deploy Angular to GitHub Pages
-
 on:
   push:
     branches: [ "feature/deploy" ]
-
 permissions:
   contents: write
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Instalar dependências
-        run: npm ci
-
-      - name: Generate environment files
-        run: |
+      - run: npm ci
+      - run: |
           mkdir -p src/environments
-          cat > src/environments/environment.development.ts <<EOF
-          export const environment = {
-            production: false,
-            supabaseUrl: '${SUPABASE_URL}',
-            supabaseKey: '${SUPABASE_KEY}'
-          };
-          EOF
-          cat > src/environments/environment.ts <<EOF
-          export const environment = {
-            production: true,
-            supabaseUrl: '${SUPABASE_URL}',
-            supabaseKey: '${SUPABASE_KEY}'
-          };
-          EOF
-
-      - name: Fazer o Build Angular
-        run: npm run build -- --base-href=/Projeto-Final-Readrometer/
-
-      - name: DEBUG COMPLETO - Verificar build
-        run: |
-          echo "📁 Estrutura após build:"
-          find . -name "*.html" || echo "❌ Nenhum HTML!"
-          echo "📁 Pastas docs/dist:"
-          ls -la docs/ 2>/dev/null || echo "❌ docs vazia"
-          ls -la dist/ 2>/dev/null || echo "❌ dist vazia"
-
-      - name: Ajustar 404.html (auto-detect)
-        run: |
-          if [ -f "docs/index.html" ]; then
-            cd docs && cp index.html 404.html && echo "✅ docs/index.html OK"
-          elif [ -f "docs/browser/index.html" ]; then  
-            cd docs/browser && cp index.html 404.html && echo "✅ docs/browser OK"
-          elif [ -f "dist/readrometer/index.html" ]; then
-            cd dist/readrometer && cp index.html 404.html && echo "✅ dist/readrometer OK"
-          else
-            echo "❌ index.html NÃO ENCONTRADO!"
-            find . -name "index.html"
-            exit 1
-          fi
-
-      - name: Publicar no GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+          echo "export const environment = { production: true, supabaseUrl: '${SUPABASE_URL}', supabaseKey: '${SUPABASE_KEY}' };" > src/environments/environment.ts
+      - run: npm run build -- --base-href=/Projeto-Final-Readrometer/
+      - run: |
+          cd docs
+          cp index.html 404.html
+          touch .nojekyll
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-pages
+          user: joanacf1005
+          repo: Projeto-Final-Readrometer
+
