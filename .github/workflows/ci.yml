@@ -37,7 +37,7 @@ jobs:
       - name: Generate environment.ts
         run: |
           mkdir -p src/environments
-          cat > src/environments/environment.development.ts << 'EOF'
+          cat > src/environments/environment.development.ts << EOF
           export const environment = {
             production: false,
             supabaseUrl: "${{ secrets.SUPABASE_URL }}",

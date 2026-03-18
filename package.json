@@ -2,9 +2,9 @@
   "name": "readrometer",
   "version": "0.0.0",
   "scripts": {
+    "build": "npx ng build --configuration development",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:readrometer": "node dist/readrometer/server/server.mjs",
