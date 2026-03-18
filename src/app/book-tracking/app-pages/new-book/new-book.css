@@ -212,6 +212,11 @@ button[type="submit"]:active {
   transform: translateY(0);
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* RESPONSIVO */
 
 @media (max-width: 1024px) {

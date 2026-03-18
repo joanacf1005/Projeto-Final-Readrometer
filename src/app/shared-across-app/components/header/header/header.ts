@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrl: './header.css'
 })
 export class Header implements OnInit {
-  constructor(private router: Router) {}
+  private router = inject(Router)
+  // constructor(private router: Router) {}
 
   isDarkMode = false;
   isMenuOpen = false;  

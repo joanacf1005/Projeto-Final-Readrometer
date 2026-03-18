@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../../new-book/new-book'; 
-import { Router, RouterLink } from '@angular/router';
+// import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 export interface DashboardData {
   total: number;

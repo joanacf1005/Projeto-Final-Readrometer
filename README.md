@@ -1,11 +1,17 @@
 ## Projeto Final - Readrometer, Gestão de Livros
 
+![Angular](https://img.shields.io/badge/Angular-21.2.0-emerald?logo=angular&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-blueviolet?logo=supabase&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-brightgreen?logo=docker&logoColor=white)
+
+[![CI](https://github.com/joanacf1005/Projeto-Final-Readrometer/actions/workflows/ci.yml/badge.svg)](https://github.com/joanacf1005/Projeto-Final-Readrometer/actions/workflows/ci.yml)
+
 Este projeto foi feito com recurso às tecnologias: Angular CLI version 21.2.0.
 
 ## Aluno
 
 Aluno: Joana Freitas
-UFCD: Programação JavaScript
+UFCD: Programação JavaScript e Integração de Processos
 Framework: Angular
 Linguagem: TypeScript
 
@@ -14,6 +20,8 @@ Linguagem: TypeScript
 Projeto Final da disciplina de Programação em JavaScript. 
 Consiste numa Single Page Application desenvolvida em Angular para gerir a leitura pessoal de livros.
 Permite adicionar, visualizar, editar, remover e filtrar livros. 
+
+Armazenamento Supabase e LocalStorage. Totalmente Dockerizado e com CI/CD.
 
 ## Funcionalidades
 
@@ -51,6 +59,10 @@ Adicionar Livro:
 
 Armazenamento de dados em LocalStorage;
 
+Login:
+    -Armazenamento de dados login em supabase
+
+
 ## Instalação e execução
 
 clonar repositório:
@@ -67,7 +79,8 @@ Instalar dependências:
 
 Executar a aplicação:
 
-    ng serve
+    ng serve --open
+
 
 ## Estrutura do Projeto
 
@@ -81,16 +94,20 @@ readrometer/
 │   │   │   │   ├── new-book/                  ← ADD/EDIT com título dinâmico
 │   │   │   │   ├── book-details/              ← Detalhes, botão editar e apagar
 │   │   │   │   └── dashboard-stats/           ← Estatísticas
-│   │   │   └── app.routes.ts                  ← Rotas 
+│   │   │   ├── app.routes.ts                  ← Rotas 
+│   │   │   └── services/supabase.ts
 │   │   ├── shared-across-app/
 │   │   │   ├── footer/                        ← Rodapé global
 │   │   │   └── header/                        ← Cabeçalho global
-│   │   └── app.ts/html/scss                   
+│   │   ├── app.ts/html/scss  
+│   │   └── environments/                 
 │   ├── index.html                             
 │   └── styles.css                             ← Global styles
 ├── angular.json                               
 ├── package.json                              
-├── tsconfig.json                             
+├── tsconfig.json  
+├── Dockerfile
+├── .github/workflows/ci.yml                        
 └── README.md                                  
 
 ## Futuras Implementações
@@ -100,4 +117,7 @@ Pesquisa com filtros diferentes (como categoria, nome);
 Ordenação por ordem alfabética;
 Mais campos de formulário;
 
+## Demo Docker
+    docker ps -> no terminal
+    localhost:8080 -> no browser
 

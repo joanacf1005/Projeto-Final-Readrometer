@@ -1,3 +1,5 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
 # Compiled output
 /dist
 /tmp
@@ -42,8 +44,5 @@ __screenshots__/
 Thumbs.db
 
 # environment
-src/environments/environment.development.ts
-
-# GitHub Pages output
-/dist
-.vercel
+environments/
+.dockerignore

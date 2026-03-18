@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardStats } from '../dashboard-stats/dashboard-stats/dashboard-stats';
 import { Book } from '../new-book/new-book';
 import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class Dashboard implements OnInit {
   lastBook: Book | null = null;
 
-  constructor(private router: Router) {}
+  private router = inject(Router)
 
   goToBookDetails(bookId: string | undefined) {
     if (bookId) {
